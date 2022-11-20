@@ -1,7 +1,7 @@
 const { request, response } = require("express");
 const jwt = require("jsonwebtoken");
 const Usuario = require("../models/UsuarioModel");
-const Role = require("../models/RoleModel");
+const { Role } = require("../models/RoleModel");
 
 const registrarse = async (req = request, res = response) => {
   const { username, email, password, roles } = req.body;
@@ -11,6 +11,13 @@ const registrarse = async (req = request, res = response) => {
     email,
     password: await Usuario.encryptPassword(password),
   });
+
+  const emailExistente = await Usuario.findOne({ email: email });
+  if (emailExistente) {
+    return res.status(400).json({
+      message: "Este correo ya se encuentra registrado",
+    });
+  }
 
   if (roles) {
     const encontrarRole = await Role.find({ name: { $in: roles } });
