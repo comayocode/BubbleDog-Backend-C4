@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const morgan = require("morgan");
 const connectionDB = require("../databases/conexionDB");
+const createRole = require("../libs/initialSetup");
 
 class Server {
   constructor() {
@@ -9,6 +10,10 @@ class Server {
     this.port = process.env.PORT;
     this.pathServicios = "/api/servicios";
     this.pathUsuarios = "/api/usuarios";
+    this.pathAuthUsuario = "/api/auth";
+
+    // Cuando inicia el servidor la app crea los roles
+    this.getRoles();
 
     // Se ejecutan los Middlewares
     this.middlewares();
@@ -20,6 +25,10 @@ class Server {
     this.routes();
   }
 
+  async getRoles() {
+    await createRole();
+  }
+
   async getConnection() {
     await connectionDB();
   }
@@ -27,6 +36,7 @@ class Server {
   routes() {
     this.app.use(this.pathServicios, require("../routes/serviciosRoutes"));
     this.app.use(this.pathUsuarios, require("../routes/usuarioRoutes"));
+    this.app.use(this.pathAuthUsuario, require("../routes/authRoutes"));
   }
 
   middlewares() {
