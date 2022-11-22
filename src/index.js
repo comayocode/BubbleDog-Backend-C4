@@ -5,7 +5,8 @@ const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const app = express();
 
-const backRoutes = require("./routes/routesCliente");
+const clienteRoutes = require("./routes/routesCliente");
+const servicioRoutes = require("./routes/routesServicio");
 
 const db = require("./database/db").mongoURIlocal;
 
@@ -31,7 +32,7 @@ app.get("/", (req, res) => {
 
 
 app.use(cors());
-app.use("/APIREST",backRoutes);
+app.use("/APIREST",clienteRoutes,servicioRoutes);
 
 
 //iniciando Servidor

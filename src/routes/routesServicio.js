@@ -2,25 +2,25 @@ const mongoose = require("mongoose");
 const express = require("express");
 const router = express.Router();
 
-let clienteSchema = require("../models/Cliente");
+let servicioSchema = require("../models/Servicio");
 
-//crear cliente
-router.route("/crear-clinte").post((req, res, next) => {
-    clienteSchema.create(req.body, (error, data) => {
+//crear servicio
+router.route("/crear-servicio").post((req, res, next) => {
+    servicioSchema.create(req.body, (error, data) => {
       if (error) {
         console.log(error);
         return next(error);
       } else {
         console.log(data);
-        console.log("Cliente creado con exito");
+        console.log("servicio creado con exito");
         res.json(data);
       }
     });
   });
   
-  //Leer cliente
-  router.route("/listar-cliente").get((req, res, next) => {
-    clienteSchema.find((error, data) => {
+  //Leer servicio
+  router.route("/listar-servicio").get((req, res, next) => {
+    servicioSchema.find((error, data) => {
       if (error) {
         console.log(error);
         return next(error);
@@ -31,9 +31,9 @@ router.route("/crear-clinte").post((req, res, next) => {
     });
   });
 
-  //actualizar cliente
-  router.route("/actualizar-cliente/:id").put((req, res, next) => {
-    clienteSchema.findByIdAndUpdate(
+  //actualizar servicio
+  router.route("/actualizar-servicio/:id").put((req, res, next) => {
+    servicioSchema.findByIdAndUpdate(
       req.params.id,
       {
         $set: req.body,
@@ -44,22 +44,22 @@ router.route("/crear-clinte").post((req, res, next) => {
           return next(error);
         } else {
           console.log(data);
-          console.log("Cliente actualizado con exito");
+          console.log("servicio actualizado con exito");
           res.json(data);
         }
       }
     );
   });
 
-  //Borrar cliente
-router.route("/borrar-cliente/:id").delete((req, res, next) => {
-  clienteSchema.findByIdAndRemove(req.params.id, (error, data) => {
+  //Borrar servicio
+router.route("/borrar-servicio/:id").delete((req, res, next) => {
+    servicioSchema.findByIdAndRemove(req.params.id, (error, data) => {
     if (error) {
       console.log(error);
       return next(error);
     } else {
       console.log(data);
-      console.log("cliente eliminado con exito");
+      console.log("servicio eliminado con exito");
       res.status(200).json({
         msg: data,
       });
