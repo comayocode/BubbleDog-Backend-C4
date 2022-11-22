@@ -1,32 +1,20 @@
 {
-  "name": "bubbledog_c4",
+  "name": "bubbledogback",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node src/index.js",
     "dev": "nodemon src/index.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/comayocode/bubbledog-backend-c4.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/comayocode/bubbledog-backend-c4/issues"
-  },
-  "homepage": "https://github.com/comayocode/bubbledog-backend-c4#readme",
   "dependencies": {
-    "bcryptjs": "^2.4.3",
-    "cookie-parser": "^1.4.6",
+    "body-parser": "^1.20.1",
     "cors": "^2.8.5",
-    "dotenv": "^16.0.3",
     "express": "^4.18.2",
-    "express-validator": "^6.14.2",
-    "helmet": "^6.0.0",
-    "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.7.2",
     "morgan": "^1.10.0"
   },
