@@ -48,7 +48,7 @@ const updateServiciosById = async (req = request, res = response) => {
 const deleteServiciosById = async (req = request, res = response) => {
   const { servicioId } = req.params;
   await Servicio.findByIdAndDelete(servicioId);
-  res.status(204).json(servicioId);
+  return res.status(204).json({ message: "Servicio eliminado" });
 };
 
 module.exports = {

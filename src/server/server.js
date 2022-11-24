@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require("cors");
+const cookieParser = require("cookie-parser");
 const morgan = require("morgan");
 const connectionDB = require("../databases/conexionDB");
 const createRole = require("../libs/initialSetup");
@@ -9,7 +10,7 @@ class Server {
     this.app = express();
     this.port = process.env.PORT;
     this.pathServicios = "/api/servicios";
-    this.pathUsuarios = "/api/usuarios";
+    this.pathUsuarios = "/api/users";
     this.pathAuthUsuario = "/api/auth";
 
     // Cuando inicia el servidor la app crea los roles
@@ -42,7 +43,8 @@ class Server {
   middlewares() {
     this.app.use(morgan("dev"));
     // Uso de los cors
-    this.app.use(cors());
+    this.app.use(cors({ origin: "http://localhost:3000", credentials: true }));
+    this.app.use(cookieParser());
 
     this.app.use(express.json());
 

@@ -1,4 +1,5 @@
 const { Router } = require("express");
+const router = Router();
 const {
   getServicios,
   getServiciosById,
@@ -6,16 +7,16 @@ const {
   updateServiciosById,
   deleteServiciosById,
 } = require("../controllers/serviciosController");
-const router = Router();
+const { userAdmin, verifyToken } = require("../middlewares/authJwt");
 
 router.get("/", getServicios);
 
 router.get("/:servicioId", getServiciosById);
 
-router.post("/", createServicios);
+router.post("/", [verifyToken, userAdmin], createServicios);
 
-router.put("/:servicioId", updateServiciosById);
+router.put("/:servicioId", [verifyToken, userAdmin], updateServiciosById);
 
-router.delete("/:servicioId", deleteServiciosById);
+router.delete("/:servicioId", [verifyToken, userAdmin], deleteServiciosById);
 
 module.exports = router;
