@@ -1,8 +1,14 @@
 const { Router } = require("express");
 const router = Router();
 
-router.get("/", (req, res) => {
-  res.json("Obteniendo usuarios");
-});
+const { createUsuario } = require("../controllers/usuarioController");
+const { verifyToken, userAdmin } = require("../middlewares/authJwt");
+const verificarRolesExistentes = require("../middlewares/verifySignup");
+
+router.post(
+  "/",
+  [verifyToken, userAdmin, verificarRolesExistentes],
+  createUsuario
+);
 
 module.exports = router;

@@ -16,6 +16,7 @@ const usuarioSchema = new Schema(
     password: {
       type: String,
       required: true,
+      minlength: 6,
     },
 
     //De esta manera se hace una relacion entre collections de Schemas con MongoDB
