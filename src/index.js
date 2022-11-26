@@ -1,3 +1,4 @@
+require("./config/config")
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
@@ -5,8 +6,7 @@ const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const app = express();
 
-const clienteRoutes = require("./routes/routesCliente");
-const servicioRoutes = require("./routes/routesServicio");
+const backRoutes = require("./routes/routes");
 
 const db = require("./database/db").mongoURIlocal;
 
@@ -17,22 +17,14 @@ mongoose
   .catch((err) => console.log(err));
 
 
-app.set("port", process.env.PORT || 3000);
+app.set("port", process.env.PORT);
 
 app.use(morgan("dev"));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-//Respuesta en el navegador
-app.get("/", (req, res) => {
-    res.json({
-      Title: "Hola soy un API REST",
-    });
-  });
-
-
 app.use(cors());
-app.use("/APIREST",clienteRoutes,servicioRoutes);
+app.use("/APIREST",backRoutes);
 
 
 //iniciando Servidor

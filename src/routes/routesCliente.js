@@ -5,11 +5,11 @@ const router = express.Router();
 let clienteSchema = require("../models/Cliente");
 
 //crear cliente
-router.route("/crear-clinte").post((req, res, next) => {
+router.route("/crear-clinte").post((req, res) => {
     clienteSchema.create(req.body, (error, data) => {
       if (error) {
         console.log(error);
-        return next(error);
+        return (error);
       } else {
         console.log(data);
         console.log("Cliente creado con exito");
@@ -19,11 +19,11 @@ router.route("/crear-clinte").post((req, res, next) => {
   });
   
   //Leer cliente
-  router.route("/listar-cliente").get((req, res, next) => {
+  router.route("/listar-cliente").get((req, res) => {
     clienteSchema.find((error, data) => {
       if (error) {
         console.log(error);
-        return next(error);
+        return (error);
       } else {
         console.log(data);
         res.json(data);
@@ -32,7 +32,7 @@ router.route("/crear-clinte").post((req, res, next) => {
   });
 
   //actualizar cliente
-  router.route("/actualizar-cliente/:id").put((req, res, next) => {
+  router.route("/actualizar-cliente/:id").put((req, res) => {
     clienteSchema.findByIdAndUpdate(
       req.params.id,
       {
@@ -41,7 +41,7 @@ router.route("/crear-clinte").post((req, res, next) => {
       (error, data) => {
         if (error) {
           console.log(error);
-          return next(error);
+          return (error);
         } else {
           console.log(data);
           console.log("Cliente actualizado con exito");
@@ -52,11 +52,11 @@ router.route("/crear-clinte").post((req, res, next) => {
   });
 
   //Borrar cliente
-router.route("/borrar-cliente/:id").delete((req, res, next) => {
+router.route("/borrar-cliente/:id").delete((req, res) => {
   clienteSchema.findByIdAndRemove(req.params.id, (error, data) => {
     if (error) {
       console.log(error);
-      return next(error);
+      return (error);
     } else {
       console.log(data);
       console.log("cliente eliminado con exito");

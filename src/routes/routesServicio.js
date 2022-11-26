@@ -5,11 +5,11 @@ const router = express.Router();
 let servicioSchema = require("../models/Servicio");
 
 //crear servicio
-router.route("/crear-servicio").post((req, res, next) => {
+router.route("/crear-servicio").post((req, res) => {
     servicioSchema.create(req.body, (error, data) => {
       if (error) {
         console.log(error);
-        return next(error);
+        return (error);
       } else {
         console.log(data);
         console.log("servicio creado con exito");
@@ -19,11 +19,11 @@ router.route("/crear-servicio").post((req, res, next) => {
   });
   
   //Leer servicio
-  router.route("/listar-servicio").get((req, res, next) => {
+  router.route("/listar-servicio").get((req, res) => {
     servicioSchema.find((error, data) => {
       if (error) {
         console.log(error);
-        return next(error);
+        return (error);
       } else {
         console.log(data);
         res.json(data);
@@ -32,7 +32,7 @@ router.route("/crear-servicio").post((req, res, next) => {
   });
 
   //actualizar servicio
-  router.route("/actualizar-servicio/:id").put((req, res, next) => {
+  router.route("/actualizar-servicio/:id").put((req, res) => {
     servicioSchema.findByIdAndUpdate(
       req.params.id,
       {
@@ -41,7 +41,7 @@ router.route("/crear-servicio").post((req, res, next) => {
       (error, data) => {
         if (error) {
           console.log(error);
-          return next(error);
+          return (error);
         } else {
           console.log(data);
           console.log("servicio actualizado con exito");
@@ -52,11 +52,11 @@ router.route("/crear-servicio").post((req, res, next) => {
   });
 
   //Borrar servicio
-router.route("/borrar-servicio/:id").delete((req, res, next) => {
+router.route("/borrar-servicio/:id").delete((req, res) => {
     servicioSchema.findByIdAndRemove(req.params.id, (error, data) => {
     if (error) {
       console.log(error);
-      return next(error);
+      return (error);
     } else {
       console.log(data);
       console.log("servicio eliminado con exito");
