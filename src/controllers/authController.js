@@ -62,7 +62,7 @@ const iniciarSesion = async (req = request, res = response) => {
   console.log(userExist);
 
   const token = jwt.sign({ id: userExist._id }, process.env.WORD_SECRET, {
-    expiresIn: "1h", // 8 Horas
+    expiresIn: "2h", // 8 Horas
   });
 
   res.cookie(String(userExist._id), token, {
@@ -108,7 +108,7 @@ const refreshToken = (req = request, res = response, next) => {
     res.cookie[`${user.id}`] = "";
 
     const token = jwt.sign({ id: user.id }, process.env.WORD_SECRET, {
-      expiresIn: "1h",
+      expiresIn: "2h",
     });
 
     res.cookie(String(user.id), token, {

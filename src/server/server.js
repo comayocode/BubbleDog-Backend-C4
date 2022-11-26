@@ -8,9 +8,13 @@ const createRole = require("../libs/initialSetup");
 class Server {
   constructor() {
     this.app = express();
+    //Variable de entorno donde se encuentra la bas de datos
     this.port = process.env.PORT;
+    //Rustas o Endpoints de la API-REST
     this.pathServicios = "/api/servicios";
     this.pathUsuarios = "/api/users";
+    this.pathClientes = "/api/clientes";
+    this.pathDetallesServicio = "/api/detallesServicio";
     this.pathAuthUsuario = "/api/auth";
 
     // Cuando inicia el servidor la app crea los roles
@@ -37,6 +41,11 @@ class Server {
   routes() {
     this.app.use(this.pathServicios, require("../routes/serviciosRoutes"));
     this.app.use(this.pathUsuarios, require("../routes/usuarioRoutes"));
+    this.app.use(this.pathClientes, require("../routes/routesCliente"));
+    this.app.use(
+      this.pathDetallesServicio,
+      require("../routes/routesDetalleServicio")
+    );
     this.app.use(this.pathAuthUsuario, require("../routes/authRoutes"));
   }
 
@@ -45,7 +54,6 @@ class Server {
     // Uso de los cors
     this.app.use(cors({ origin: "http://localhost:3000", credentials: true }));
     this.app.use(cookieParser());
-
     this.app.use(express.json());
 
     // Carpeta de elementos estaticos
