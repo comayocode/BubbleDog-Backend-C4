@@ -45,4 +45,23 @@ router.route("/crear-movimiento").post((req, res) => {
   });
 });
 
+router.route("/actualizar-movimiento/:id").put((req, res) => {
+  movimientoSchema.findByIdAndUpdate(
+    req.params.id,
+    {
+      $set: req.body,
+    },
+    (error, data) => {
+      if (error) {
+        console.log(error);
+        return (error);
+      } else {
+        console.log(data);
+        console.log("movimiento actualizado con exito");
+        res.json(data);
+      }
+    }
+  );
+});
+
   module.exports = router;
