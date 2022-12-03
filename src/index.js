@@ -8,7 +8,7 @@ const app = express();
 
 const backRoutes = require("./routes/routes");
 
-const db = require("./database/db").mongoURIlocal;
+const db = require("./database/db").mongoURI;
 
 
 mongoose
